@@ -1,6 +1,6 @@
 To run
 g++ -std=c++11 a.cpp;
-./a.out  < in
+./a.out  < in > out
 
 To shuffle in file : sort --random-sort in
 
