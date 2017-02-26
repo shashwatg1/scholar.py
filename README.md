@@ -1,9 +1,9 @@
-To run
-g++ -std=c++11 a.cpp;
-./a.out  < in > out
-
-To shuffle in file : sort --random-sort in
-
+>
+>To run
+>g++ -std=c++11 a.cpp;
+>./a.out  < in > out
+>To shuffle in file : sort --random-sort in
+> ABHINAV
 scholar.py
 ==========
 
