@@ -33,7 +33,10 @@ def ssh(host, cmd, user, password, timeout=30, bg_run=False):
 with open('run.sh', 'r') as myfile:
         data=myfile.read().replace('\n', ';')
 print data
-try:
-  print ssh('10.5.16.240', data, 'user', 'user12')
-except:
-  print 'errored'
+ip_string = '10.5.16.'
+for ip_end in range(1000):
+    ip = ip_string + str(ip_end)
+    try:
+        print ssh(ip, data, 'user', 'user12')
+    except:
+        print 'errored'
