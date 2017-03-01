@@ -14,27 +14,50 @@ To run: ./a.out
 #include <string>
 #include <fstream>
 using namespace std;
-int main() {
+int main()
+{
     string line;
     ifstream myfile("queryNames"); // input file
     ofstream myfileO("queryUrls"); // output file
-    if(myfile.is_open() && !myfile.eof()) {
+    if(myfile.is_open() && !myfile.eof())
+    {
         getline(myfile,line);
         int c=0;
-        while(line[c]!='\0')
+        int l=line.length();
+        while(c<l)
         {
+            while(!(((line[c]>='A')&&(line[c]<='Z'))||((line[c]>='a')&&(line[c]<='z'))))
+            {
+                if(line[c]==' ' || line[c]=='\0')
+                    break;
+                line.erase(c,1);
+                l--;
+            }
             if(line[c]==' ')
                 line[c]='+';
+            if(line[c]=='\0')
+                    break;
             c++;
         }
         myfileO << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
-        while(!myfile.eof()) {
+        while(!myfile.eof())
+        {
             getline(myfile,line);
             int c=0;
-            while(line[c]!='\0')
+            int l=line.length();
+            while(c<l)
             {
+                while(!(((line[c]>='A')&&(line[c]<='Z'))||((line[c]>='a')&&(line[c]<='z'))))
+                {
+                    if(line[c]==' ' || line[c]=='\0')
+                        break;
+                    line.erase(c,1);
+                    l--;
+                }
                 if(line[c]==' ')
                     line[c]='+';
+                if(line[c]=='\0')
+                    break;
                 c++;
             }
             myfileO << endl << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
