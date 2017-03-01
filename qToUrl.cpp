@@ -4,24 +4,21 @@ Url = https://scholar.google.co.in/scholar?hl=en&q=word1+word2
 Query = word1 word2 (in author)
 Url = https://scholar.google.co.in/scholar?as_q=&hl=en&as_sauthors=word1+word2
 
-What the code is doing: read from a file called queryNames and output urls in a file called queryUrls
+What the code is doing: accept a file called queryNames in cin and output urls in a file called queryUrls
 
 To compile: g++ qToUrl.cpp
-To run: ./a.out
+To run: ./a.out < queryNames > queryUrls
 */
 
 #include <iostream>
 #include <string>
-#include <fstream>
 using namespace std;
 int main()
 {
     string line;
-    ifstream myfile("queryNames"); // input file
-    ofstream myfileO("queryUrls"); // output file
-    if(myfile.is_open() && !myfile.eof())
+    if(!cin.eof())
     {
-        getline(myfile,line);
+        getline(cin,line);
         int c=0;
         int l=line.length();
         while(c<l)
@@ -39,10 +36,15 @@ int main()
                     break;
             c++;
         }
-        myfileO << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
-        while(!myfile.eof())
+        while(line.find("++") && line.find("++")<line.length())
         {
-            getline(myfile,line);
+            c=line.find("++");
+            line.erase(c,1);
+        }
+        cout << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
+        while(!cin.eof())
+        {
+            getline(cin,line);
             int c=0;
             int l=line.length();
             while(c<l)
@@ -60,9 +62,12 @@ int main()
                     break;
                 c++;
             }
-            myfileO << endl << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
+            while(line.find("++") && line.find("++")<line.length())
+            {
+                c=line.find("++");
+                line.erase(c,1);
+            }
+            cout << endl << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
         }
-        myfile.close();
-        myfileO.close();
     }
 }
