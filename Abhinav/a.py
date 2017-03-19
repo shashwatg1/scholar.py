@@ -73,7 +73,8 @@ def scp(destination, file_id, user, password, timeout=30, bg_run=False):
     options = '-q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null -oPubkeyAuthentication=no'
     if bg_run:
         options += ' -f'
-    ssh_cmd = 'scp %s %s' % (file_id, destination)
+    ssh_cmd = 'scp %s %s %s' % (options, file_id, destination)
+    print ssh_cmd
     child = pexpect.spawn(ssh_cmd, timeout=timeout)
     child.expect(['password: '])
     child.sendline(password)
@@ -124,14 +125,19 @@ for ip in ips:
 		except: pass
 		print ssh(ip, 'mkdir sch;', 'user', 'user12')
 		print 'mkdir'
+		time.sleep(0.4)
 		print scp(destination, file_id2, 'user', 'user12')
 		print 'file_id2'
+		time.sleep(0.4)
 		print scp(destination+'qin', file_id, 'user', 'user12')
 		print 'file_id'
+		time.sleep(0.4)
 		print scp(destination, file_id3, 'user', 'user12')
 		print 'file_id3'
+		time.sleep(0.4)
 		print scp(destination, file_id4, 'user', 'user12')
 		print 'file_id4'
+		time.sleep(0.4)
 		print scp(destination, file_id5, 'user', 'user12')
 		print 'file_id5'
 		time.sleep(3);
