@@ -5,18 +5,23 @@ import sys
 import tempfile
 import pexpect
 k = 0
-myip='10.5.16.241'
+myip='10.5.16.240'
 with open('qin', 'r') as myfile:
 	querries=myfile.read().splitlines()
 
 with open('qout', 'r') as myfile:
 	urls=myfile.read().splitlines()
 waited_once = 0;
+xk = 0
 for i in range(len(urls)):
-	querries[i]=querries[i].replace(' ','')
+	querries[i]=querries[i].replace(' ','_')
+	if querries[i] < 3:
+		continue
 	print 'running: ' + 'bash wget_script.sh ' + urls[i] + ' ' + 'HTML_scrapped/' + querries[i]
 	x = os.popen('bash wget_script.sh \'' + urls[i] + '\' ' + 'HTML_scrapped/' + querries[i] + '&>> log.txt')
-	time.sleep(12+random.randint(10,19))
+	ran = int(36+24*xk**0.5 + 10*xk**0.3);
+	time.sleep(int(ran/3+3*xk+random.randint(ran/4,ran/2)))
+	xk += 1
 	if 'wget failed' in x:
 		os.popen('rm HTML_scrapped/' + querries[i])
 		k +=1
@@ -30,7 +35,9 @@ for i in range(len(urls)):
 			with open('fault', 'r') as f:
 				x = f.read()
 			if x.count('The document has moved') >= 4:
+				os.popen("(echo 'waiting since'; date) >> waiting")
 				os.system("sleep 30m")
+				os.popen("(echo 'waited till'; date) >> waiting")
 				os.system("rm cookie.txt")
 				waited_once = 1
 		except:
@@ -99,11 +106,22 @@ def scpr(destination, file_id, user, password, timeout=30, bg_run=False):
 sr1 = querries[0]+str(random.randint(1,99))
 sr2 = querries[0]+str(random.randint(1,99))
 try:
+	myip = '10.5.16.240'
 	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
+	myip = '10.5.16.100'
+	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
+	myip = '10.5.16.51'
+	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
+
+
 except:
 	time.sleep(2)
 	try:
 		scpr('user@'+myip+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
+		myip2='10.5.16.230'
+		scpr('user@'+myip2+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
+		myip3 = '10.5.16.42'
+		scpr('user@'+myip3+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
 	except:
 		print 'scpr has errored'
 		f = open('error', 'w')

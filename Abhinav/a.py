@@ -8,6 +8,7 @@ def ssh(host, cmd, user, password, timeout=30, bg_run=False):
     Throws an exception if the command doesn't return 0.
     bgrun: run command in the background"""
 
+    # return ''
     fname = tempfile.mktemp()
     fout = open(fname, 'w')
 
@@ -45,6 +46,7 @@ def ssh_detached(host, cmd, user, password, timeout=30, bg_run=False):
         options += ' -f'
     ssh_cmd = 'ssh %s@%s %s screen -d -m "%s"' % (user, host, options, cmd)
     print ssh_cmd
+    # return ''
     child = pexpect.spawn(ssh_cmd, timeout=timeout)
     child.expect(['password: '])
     child.sendline(password)
@@ -75,6 +77,7 @@ def scp(destination, file_id, user, password, timeout=30, bg_run=False):
         options += ' -f'
     ssh_cmd = 'scp %s %s %s' % (options, file_id, destination)
     print ssh_cmd
+    # return ''
     child = pexpect.spawn(ssh_cmd, timeout=timeout)
     child.expect(['password: '])
     child.sendline(password)
@@ -111,12 +114,14 @@ file_id2 = '/home/user/Desktop/sch/Abhinav/qToUrl.cpp'
 file_id3 = '/home/user/Desktop/sch/Abhinav/wget_script.sh'
 file_id4 = '/home/user/Desktop/sch/Abhinav/ssh_run.py'
 file_id5 = '/home/user/Desktop/sch/Abhinav/run.sh'
-
+xk = 0
 for ip in ips:
     if len(ip) <=2:
         continue
     try:
 		file_id = '/home/user/Desktop/sch/Abhinav/' + qinlist[j-1]
+		print 'j = ', j, 'qin = ', qinlist[j-1]
+		j+=1	
 		destination = 'user@' + ip + ':~/sch/'
 		print 'B'
 		try:
@@ -141,10 +146,12 @@ for ip in ips:
 		print scp(destination, file_id5, 'user', 'user12')
 		print 'file_id5'
 		time.sleep(3);
-		print ssh_detached(ip, data, 'user', 'user12')
+		waitt = ' '+str(int(xk*8.5+2*xk**1.4+0.7*xk**1.8))+'m'
+		print >> sys.stderr, ip + ' '+file_id+' ' + waitt
+		xk += 1
+		print ssh_detached(ip, data+waitt, 'user', 'user12')
 
 		print 'data'
-		j+=1	
     except:
 		print 'errored'
 		pass
