@@ -106,26 +106,36 @@ def scpr(destination, file_id, user, password, timeout=30, bg_run=False):
 sr1 = querries[0]+str(random.randint(1,99))
 sr2 = querries[0]+str(random.randint(1,99))
 try:
-	myip = '10.5.16.240'
+	myip = '10.5.16.230'
 	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
-	myip = '10.5.16.100'
+	time.sleep(2)
+	myip = '10.5.16.42'
 	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
-	myip = '10.5.16.51'
+	time.sleep(2)
+	myip = '10.5.16.101'
 	scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
-
+	time.sleep(2)
+	# myip = '10.5.16.230'
+	# scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
 
 except:
 	time.sleep(2)
 	try:
+
+		myip = '10.5.16.42'
+		scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
 		scpr('user@'+myip+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
 		myip2='10.5.16.230'
 		scpr('user@'+myip2+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
 		myip3 = '10.5.16.42'
 		scpr('user@'+myip3+':~/saves/'+sr2, 'HTML_scrapped', 'user', 'user12')
 	except:
+
+		myip = '10.5.16.101'
+		scpr('user@'+myip+':~/saves/'+sr1, 'HTML_scrapped', 'user', 'user12')
 		print 'scpr has errored'
-		f = open('error', 'w')
+		f = open('error', 'and')
 		f.write('scpr has errored')
-		f.write('user@'+myip+':~/saves/'+sr2)
-		f.write('user@'+myip+':~/saves/'+sr2)
+		f.write('user@'+myip+':~/saves/'+sr2+'\n')
+		# f.write('user@'+myip+':~/saves/'+sr2+)
 		f.close()

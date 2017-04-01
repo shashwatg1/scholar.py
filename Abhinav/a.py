@@ -115,6 +115,7 @@ file_id3 = '/home/user/Desktop/sch/Abhinav/wget_script.sh'
 file_id4 = '/home/user/Desktop/sch/Abhinav/ssh_run.py'
 file_id5 = '/home/user/Desktop/sch/Abhinav/run.sh'
 xk = 0
+err = []
 for ip in ips:
     if len(ip) <=2:
         continue
@@ -146,12 +147,19 @@ for ip in ips:
 		print scp(destination, file_id5, 'user', 'user12')
 		print 'file_id5'
 		time.sleep(3);
-		waitt = ' '+str(int(xk*8.5+2*xk**1.4+0.7*xk**1.8))+'m'
+		waitt = ' '+str(int(xk*8+2*xk**1.37+0.65*xk**1.77))+'m'
 		print >> sys.stderr, ip + ' '+file_id+' ' + waitt
 		xk += 1
 		print ssh_detached(ip, data+waitt, 'user', 'user12')
 
 		print 'data'
     except:
+        j-=1
+        err.append(ip)
 		print 'errored'
 		pass
+
+print 'error in: '
+print err
+if len(qinlist) - j > 0:
+    print 'can\'t last process ' +str(len(qinlist) - j) + 'files'

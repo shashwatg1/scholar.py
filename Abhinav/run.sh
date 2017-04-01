@@ -30,10 +30,18 @@ grep -lr 'has moved' . | wc -l ) >> stat
 ls | grep '\.py' | xargs rm
 ls | grep '\.cpp' | xargs rm
 ls | grep '\.sh' | xargs rm
+rm qout
+rm a.out
+rm cookie.txt
 (echo 'Cleaning done'
 echo 'total files = '
 ls HTML_scrapped/ | wc -l
 echo 'faults = '
 grep -r -l 'The document has moved' HTML_scrapped/ | wc -l
-} >> stat
+) >> stat
+(echo 'empty files = '
+find . -type f -empty
+find . -type f -empty -delete
+echo 'finished') >>stat
+cp -f stat ../
 # scp -r /home/user/sch/HTML_scrapped us

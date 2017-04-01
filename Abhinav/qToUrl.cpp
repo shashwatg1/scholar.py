@@ -42,7 +42,7 @@ int main()
             c=line.find("++");
             line.erase(c,1);
         }
-        if (!(l < 2)) cout << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
+        if (!(l < 2)) cout << "https://scholar.google.co.in/scholar?hl=en&q=" << line << "&as_sdt=0\%2C5&as_ylo=1900&as_yhi=2010";
         while(!cin.eof())
         {
             getline(cin,line);
@@ -68,7 +68,7 @@ int main()
                 c=line.find("++");
                 line.erase(c,1);
             }
-            if (!(l < 2)) cout << endl << "https://scholar.google.co.in/scholar?hl=en&q=" << line;
+            if (!(l < 2)) cout << endl << "https://scholar.google.co.in/scholar?hl=en&q=" << line << "&as_sdt=0\%2C5&as_ylo=1900&as_yhi=2010";
         }
     }
 }

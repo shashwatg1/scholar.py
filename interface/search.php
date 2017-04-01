@@ -29,7 +29,7 @@ echo "
 <form action='/search.php'>
       <a href='/index.html'><img src='/images/rocketbreakermenu.png' border='0px'></a>
       <input name='search' type='text' class='searchtext' value='' size='50'>
-      <input name='submit' type='submit' class='searchbutton' id='search' value='Search Rocketbreaker'>
+      <input name='submit' type='submit' class='searchbutton' id='search' value='Search Google Scholar'>
     </div>
 
 
