@@ -4,18 +4,18 @@
 //get data
 $button = $_GET['submit'];
 $search = $_GET['search'];
-// popen('alert', 'r')
-$output = shell_exec('notify-send  terminal "Run"');
+// // popen('alert', 'r')
+// $output = shell_exec('notify-send  terminal "Run"');
+// // echo "<pre>$output</pre>";
+// $output = shell_exec('./wget_script.sh "https://scholar.google.co.in/scholar?hl=en&q=Albert+Einstein&oq=" /home/user/Desktop/a.html ');
 // echo "<pre>$output</pre>";
-$output = shell_exec('./wget_script.sh "https://scholar.google.co.in/scholar?hl=en&q=Albert+Einstein&oq=" /home/user/Desktop/a.html ');
-echo "<pre>$output</pre>";
 
 $s = $_GET['s'];
 if (!$s)
 $s = 0;
 
 
-$e = 5; // Just change to how many results you want per page
+$e = 10; // Just change to how many results you want per page
 
 
 $next = $s + $e;
@@ -50,7 +50,7 @@ echo "
   //connect to database
   mysql_connect("localhost","root","ubuntu");
   mysql_select_db("search");
-   
+   $curl_q .= "https://scholar.google.co.in/scholar?hl=en&q=";
    //explode out search term
    $search_exploded = explode(" ",$search);
    
@@ -59,17 +59,24 @@ echo "
    
         //construct query
     $x++;
-    if ($x==1)
+    $curl_q .= "$search_each+";
+    if ($x==1) {
      $construct .= "title LIKE '%$search_each%'";
-    else
+    }
+    else {
      $construct .= " AND title LIKE '%$search_each%'";
+    }
    
    }
-   
+   echo "$curl_q\n";
+   $qr .= "./wget_script.sh '$curl_q' /home/user/Desktop/a.html ";
+   echo "$qr";
+$output = shell_exec($qr);
+echo "<pre>$output</pre>";
   //echo outconstruct
   $constructx = "SELECT * FROM searchengine WHERE $construct";
   
-  $construct = "SELECT * FROM searchengine WHERE $construct LIMIT $s,$e";
+  $construct = "SELECT * FROM searchengine WHERE $construct ORDER BY citation desc LIMIT $s,$e";
   $run = mysql_query($constructx);
   
   $foundnum = mysql_num_rows($run);
