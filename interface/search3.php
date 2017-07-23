@@ -44,28 +44,28 @@ $prev = $s - $e;
     $x++;
     $curl_q .= "$search_each+";
     if ($x==1) {
-     $construct .= "title LIKE '%$search_each%'";
+     $construct .= "query LIKE '%$search_each%'";
     }
     else {
-     $construct .= " AND title LIKE '%$search_each%'";
+     $construct .= " AND query LIKE '%$search_each%'";
     }
    
    }
-   // echo "$curl_q\n";
    // $qr .= "./wget_script.sh '$curl_q' /home/user/Desktop/a.html ";
    // echo "$qr";
 // $output = shell_exec($qr);
 // echo "<pre>$output</pre>";
   //echo outconstruct
-  $constructx = "SELECT * FROM searchengine WHERE $construct";
+  $constructx = "SELECT * FROM newdb WHERE $construct";
   
-  $construct = "SELECT * FROM searchengine WHERE $construct ORDER BY citation desc LIMIT $s,$e";
+  $construct = "SELECT * FROM newdb WHERE $construct GROUP BY title ORDER BY pos  LIMIT $s,$e";
   $run = mysql_query($constructx);
   
   $foundnum = mysql_num_rows($run);
 
 
   $run_two = mysql_query("$construct");
+   echo "$construct\n";
   
   if ($foundnum==0) {}
 
@@ -81,7 +81,7 @@ $prev = $s - $e;
     //get data
    $title = $runrows['title'];
    $abs = $runrows['abstract'];
-   $url = $runrows['url'];
+   // $url = $runrows['url'];
    $citation = $runrows['citation'];
    $author = $runrows['author'];
 

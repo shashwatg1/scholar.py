@@ -117,12 +117,12 @@ file_id5 = '/home/user/Desktop/sch/Abhinav/run.sh'
 xk = 0
 err = []
 for ip in ips:
-    if len(ip) <=2:
-        continue
-    try:
+	if len(ip) <=2:
+		continue
+	try:
 		file_id = '/home/user/Desktop/sch/Abhinav/' + qinlist[j-1]
 		print 'j = ', j, 'qin = ', qinlist[j-1]
-		j+=1	
+		j+=1
 		destination = 'user@' + ip + ':~/sch/'
 		print 'B'
 		try:
@@ -153,9 +153,9 @@ for ip in ips:
 		print ssh_detached(ip, data+waitt, 'user', 'user12')
 
 		print 'data'
-    except:
-        j-=1
-        err.append(ip)
+	except:
+		j-=1
+		err.append(ip)
 		print 'errored'
 		pass
 

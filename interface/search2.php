@@ -57,9 +57,9 @@ $prev = $s - $e;
 // $output = shell_exec($qr);
 // echo "<pre>$output</pre>";
   //echo outconstruct
-  $constructx = "SELECT * FROM searchengine WHERE $construct";
+  $constructx = "SELECT * FROM newdb WHERE $construct";
   
-  $construct = "SELECT * FROM searchengine WHERE $construct ORDER BY citation desc LIMIT $s,$e";
+  $construct = "SELECT * FROM newdb WHERE $construct GROUP BY title ORDER BY citation desc LIMIT $s,$e";
   $run = mysql_query($constructx);
   
   $foundnum = mysql_num_rows($run);
@@ -81,7 +81,7 @@ $prev = $s - $e;
     //get data
    $title = $runrows['title'];
    $abs = $runrows['abstract'];
-   $url = $runrows['url'];
+   // $url = $runrows['url'];
    $citation = $runrows['citation'];
    $author = $runrows['author'];
 
